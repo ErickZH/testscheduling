@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use DB;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
