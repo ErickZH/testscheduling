@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+
+use DB;
+
+class CronJob extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'CronJob:cronjob';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'User Name Change Successfully';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        // Change name to all users
+
+        $users = DB::table('users')->get();
+
+        foreach ($users as $user) 
+        {
+            DB::table('users')
+                ->where('id', $user->id)
+                ->update(['name' => str_random(10)]);
+        }
+
+        $this->info('User Name Change Successfully');
+    }
+}
